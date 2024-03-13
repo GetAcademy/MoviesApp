@@ -3,7 +3,10 @@ function updateViewSearch() {
         <h1>Film-søk</h1>
         <table>
             <tr>
-                <th></th>
+                <th>Tittel</th>
+                <th>År</th>
+                <th>Regissør</th>
+                <th>Sjanger</th>
             </tr>
             ${createMoviesHtml()}
         </table>
@@ -17,19 +20,13 @@ function createMoviesHtml() {
         const movie = movies[i];
         html += /*HTML*/`
             <tr>
-                <td>
-                    ${movie.title}
-                </td>
+                <td><img class="movie" src="${movie.thumbnail}"/></td>
+                <td>${movie.title}</td>
+                <td>${movie.year}</td>
+                <td>${movie.director}</td>
+                <td>${movie.genres.join()}</td>
             </tr>
         `;
-
-        "Title": "Avatar",
-            "Year": "2009",
-                "Rated": "PG-13",
-                    "Released": "18 Dec 2009",
-                        "Runtime": "162 min",
-                            "Genre": "Action, Adventure, Fantasy",
-                                "Director": "James Cameron",
     }
     return html;
 }
