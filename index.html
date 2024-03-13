@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/model.js/"></script>
+    <script src="js/movies.js"></script>
+</head>
+
+<body onload="updateView()">
+    <div id="app"></div>
+    <script>
+        function updateView() {
+            const page = model.app.currentPage;
+            if (page == 'search') updateViewSearch();
+            else if (page == 'add') updateViewAdd();
+            else if (page == 'edit') updateViewEdit();
+        }
+    </script>
+</body>
+
+</html>
