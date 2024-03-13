@@ -3,10 +3,10 @@ function updateViewSearch() {
         <h1>Film-søk</h1>
         <table>
             <tr>
+                <th></th>
                 <th>Tittel</th>
-                <th>År</th>
-                <th>Regissør</th>
                 <th>Sjanger</th>
+                <th>År</th>
             </tr>
             ${createMoviesHtml()}
         </table>
@@ -22,9 +22,8 @@ function createMoviesHtml() {
             <tr>
                 <td><img class="movie" src="${movie.thumbnail}"/></td>
                 <td>${movie.title}</td>
-                <td>${movie.year}</td>
-                <td>${movie.director}</td>
                 <td>${movie.genres.join()}</td>
+                <td>${movie.year}</td>
             </tr>
         `;
     }
