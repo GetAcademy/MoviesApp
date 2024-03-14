@@ -38,19 +38,16 @@ function createFilterFormHtml() {
             />
             <br/>
         Sjanger: <br/>
-        <input 
-            type="text" 
-            oninput="model.inputs.search.filter.title=this.value"
-            value="${model.inputs.search.filter.title ?? ''}"            
-            />
-            <br/>
-        Tittel: <br/>
-        <input 
-            type="text" 
-            oninput="model.inputs.search.filter.title=this.value"
-            value="${model.inputs.search.filter.title ?? ''}"            
-            />
-            <br/>
+        <select onchange="model.inputs.search.filter.genre=this.value">
+            ${createOptionsHtml(model.genres, model.inputs.search.filter.genre, 'model.inputs.search.filter.genre')}
+        </select>
+        <br/>
+        År: <br/>
+        <select onchange="model.inputs.search.filter.year=this.value">
+            ${createOptionsHtml(model.genres, model.inputs.search.filter.year, 'model.inputs.search.filter.year')}
+        </select>
+        <br/>
+        <button onclick="filter()">Filtrer</button>        
         <button onclick="updateFilterMode(false)">Skru av filtrering</button>        
     `;
 }
