@@ -1,6 +1,7 @@
 function updateViewSearch() {
     document.getElementById('app').innerHTML = /*HTML*/`
         <h1>Film-søk</h1>
+        
         <table>
             <tr>
                 <th></th>
