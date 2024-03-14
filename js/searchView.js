@@ -52,7 +52,9 @@ function createPagingHtml() {
 
 function createFilterFormHtml() {
     const filter = model.inputs.search.filter;
-    if (filter == null) return /*HTML*/`<button onclick="updateFilterMode(true)">Filtrer</button>`;
+    if (filter == null) {
+        return /*HTML*/`<button onclick="updateFilterMode(true)">Filtrer</button>`;
+    }
     return /*HTML*/`
         Tittel: <br/>
         <input 
