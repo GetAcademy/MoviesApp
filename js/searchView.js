@@ -14,7 +14,7 @@ function updateViewSearch() {
     `;
 }
 
-function createHeaderRow(){
+function createHeaderRow() {
     return /*HTML*/`    
         <tr>
             <th></th>
@@ -84,15 +84,25 @@ function createOptionsHtml(values, selectedValue, modelField) {
     return html;
 }
 
-function getDisabled(fieldName, direction) {
+function getDisabled(field, direction) {
     const sort = model.inputs.search.sort;
     if (!sort) return '';
-    return sort.fieldName == fieldName && sort.direction == direction ? 'disabled' : '';
+    return sort.field == field && sort.direction == direction ? 'disabled' : '';
 }
 
 function createMoviesHtml() {
     let html = '';
-    const movies = model.movies;
+    let movies = model.movies;
+    const sort = model.inputs.search.sort;
+    if (sort != null) {
+        const field = sort.field;
+        const direction = sort.direction;
+        movies = JSON.parse(JSON.stringify(movies));
+        movies.sort((a, b) =>
+            a[field] == b[field] ? 0 :
+                a[field] < b[field] ? -direction : direction
+        );
+    }
     for (let i = 0; i < movies.length; i++) {
         const movie = movies[i];
         html += /*HTML*/`

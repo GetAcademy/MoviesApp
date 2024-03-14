@@ -1,5 +1,5 @@
-function sort(fieldName, direction) {
-    model.inputs.search.sort = { fieldName, direction };
+function sort(field, direction) {
+    model.inputs.search.sort = { field, direction };
     updateView();
 }
 
