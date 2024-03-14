@@ -32,13 +32,13 @@ function updateViewSearch() {
 }
 
 function createPagingHtml() {
+    const selectedPageNo = model.inputs.search.pageNo;
     let html = '';
     const pageCount = model.movies.length / 10;
     for (let pageNo = 1; pageNo < pageCount; pageNo++) {
         if (pageCount > 20 && pageNo > 10 && pageNo < pageCount - 10) continue;
-        html += /*HTML*/`
-            <a href="javascript:selectPage($${pageNo}">${pageNo}</a>
-        `;
+        html += selectedPageNo == pageNo ? ` <b>${pageNo}</b>` :
+            /*HTML*/` <a href="javascript:selectPage(${pageNo})">${pageNo}</a>`;
         if (pageCount > 20 && pageNo == 10) html += '...';
     }
     return html;

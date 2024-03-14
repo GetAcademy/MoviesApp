@@ -6,6 +6,7 @@ const model = {
         search: {
             sort: null, // { field: 'title', direction: 1 }
             filter: null, // { title: '', genre: '', year: '' }
+            pageNo: 1,
         },
         add: {
 
