@@ -1,7 +1,12 @@
 function updateViewSearch() {
     document.getElementById('app').innerHTML = /*HTML*/`
         <h1>Film-søk</h1>
-        ${createFilterFormHtml()}
+        <div>
+            ${createFilterFormHtml()}
+        </div>
+        <div>
+            ${createPagingHtml()}
+        </div>
         <table>
             <tr>
                 <th></th>
@@ -24,6 +29,19 @@ function updateViewSearch() {
             ${createMoviesHtml()}
         </table>
     `;
+}
+
+function createPagingHtml() {
+    let html = '';
+    const pageCount = model.movies.length / 10;
+    for (let pageNo = 1; pageNo < pageCount; pageNo++) {
+        if (pageCount > 20 && pageNo > 10 && pageNo < pageCount - 10) continue;
+        html += /*HTML*/`
+            <a href="javascript:selectPage($${pageNo}">${pageNo}</a>
+        `;
+        if (pageCount > 20 && pageNo == 10) html += '...';
+    }
+    return html;
 }
 
 function createFilterFormHtml() {
@@ -52,9 +70,9 @@ function createFilterFormHtml() {
     `;
 }
 
-function createOptionsHtml(values, selectedValue, modelField){
+function createOptionsHtml(values, selectedValue, modelField) {
     let html = /*HTML*/`<option ${selectedValue == null ? 'selected' : ''}></option>`;
-    for(let value of values){
+    for (let value of values) {
         html += /*HTML*/`<option ${selectedValue == value ? 'selected' : ''}>${value}</option>`
     }
     return html;
