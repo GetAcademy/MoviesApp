@@ -4,7 +4,11 @@ const model = {
     },
     inputs: {
         search: {
-
+            sort: null, 
+            // {
+            //     field: 'title',
+            //     direction: 1,
+            // },
         },
         add: {
 

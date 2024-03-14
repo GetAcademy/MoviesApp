@@ -4,13 +4,31 @@ function updateViewSearch() {
         <table>
             <tr>
                 <th></th>
-                <th>Tittel</th>
-                <th>Sjanger</th>
-                <th>År</th>
+                <th>
+                    Tittel 
+                    <button onclick="sort('title',1)" ${getDisabled('title', 1)}>▲</button>
+                    <button onclick="sort('title',-1)" ${getDisabled('title', -1)}>▼</button>
+                </th>
+                <th>
+                    Sjanger 
+                    <button onclick="sort('genre',1)" ${getDisabled('genre', 1)}>▲</button>
+                    <button onclick="sort('genre',-1)" ${getDisabled('genre', -1)}>▼</button>
+                </th>
+                <th>
+                    År 
+                    <button onclick="sort('year',1)" ${getDisabled('year', 1)}>▲</button>
+                    <button onclick="sort('year',-1)" ${getDisabled('year', -1)}>▼</button>
+                </th>
             </tr>
             ${createMoviesHtml()}
         </table>
     `;
+}
+
+function getDisabled(fieldName, direction) {
+    const sort = model.inputs.search.sort;
+    if (!sort) return '';
+    return sort.fieldName == fieldName && sort.direction == direction ? 'disabled' : '';
 }
 
 function createMoviesHtml() {
