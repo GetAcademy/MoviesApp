@@ -39,7 +39,7 @@ function createPagingHtml() {
         if (pageCount > 20 && pageNo > 10 && pageNo < pageCount - 10) continue;
         html += selectedPageNo == pageNo ? ` <b>${pageNo}</b>` :
             /*HTML*/` <a href="javascript:selectPage(${pageNo})">${pageNo}</a>`;
-        if (pageCount > 20 && pageNo == 10) html += '...';
+        if (pageCount > 20 && pageNo == 10) html += ' ...';
     }
     return html;
 }
