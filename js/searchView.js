@@ -95,8 +95,8 @@ function getDisabled(field, direction) {
 function createMoviesHtml() {
     let html = '';
     let movies = doSelectedFilter(model.movies);
-    movies = showOnlySelectedPage(movies);
     movies = doSelectedSort(movies);
+    movies = showOnlySelectedPage(movies);
 
     for (let i = 0; i < movies.length; i++) {
         const movie = movies[i];
