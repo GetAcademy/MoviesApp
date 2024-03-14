@@ -95,6 +95,7 @@ function getDisabled(field, direction) {
 function createMoviesHtml() {
     let html = '';
     let movies = doSelectedFilter(model.movies);
+    movies = showOnlySelectedPage(movies);
     movies = doSelectedSort(movies);
 
     for (let i = 0; i < movies.length; i++) {
@@ -112,6 +113,13 @@ function createMoviesHtml() {
         `;
     }
     return html;
+}
+
+function showOnlySelectedPage(movies) {
+    const pageNo = model.inputs.search.pageNo;
+    if (pageNo == null) return movies;
+    const startIndex = (pageNo - 1) * 10;
+    return movies.slice(startIndex, startIndex + 10);
 }
 
 function doSelectedFilter(movies) {
