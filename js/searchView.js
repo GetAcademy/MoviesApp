@@ -97,12 +97,20 @@ function createMoviesHtml() {
     if (sort != null) {
         const field = sort.field;
         const direction = sort.direction;
-        movies = JSON.parse(JSON.stringify(movies));
-        movies.sort((a, b) =>
+        movies = movies.toSorted((a, b) =>
             a[field] == b[field] ? 0 :
-                a[field] < b[field] ? -direction : direction
+            a[field] < b[field] ? -direction : direction
         );
     }
+    // if (sort != null) {
+    //     const field = sort.field;
+    //     const direction = sort.direction;
+    //     movies = JSON.parse(JSON.stringify(movies));
+    //     movies.sort((a, b) =>
+    //         a[field] == b[field] ? 0 :
+    //             a[field] < b[field] ? -direction : direction
+    //     );
+    // }
     for (let i = 0; i < movies.length; i++) {
         const movie = movies[i];
         html += /*HTML*/`

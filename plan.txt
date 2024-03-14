@@ -1,3 +1,5 @@
+Pause til 13:38
+
  - Organisering av modell
  - Repetisjon egne sider, feks side for å vise detaljer om en valgt film
  - Listeoperasjoner 
