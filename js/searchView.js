@@ -1,7 +1,7 @@
 function updateViewSearch() {
     document.getElementById('app').innerHTML = /*HTML*/`
         <h1>Film-søk</h1>
-        
+        ${createFilterFormHtml()}
         <table>
             <tr>
                 <th></th>
@@ -23,6 +23,14 @@ function updateViewSearch() {
             </tr>
             ${createMoviesHtml()}
         </table>
+    `;
+}
+
+function createFilterFormHtml() {
+    const filter = model.inputs.filter;
+    if (filter == null) return /*HTML*/`<button onclick="updateFilterMode(true)">Filtrer</button>`;
+    return /*HTML*/`
+        <button onclick="updateFilterMode(false)">Skru av filtrering</button>        
     `;
 }
 
