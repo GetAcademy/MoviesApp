@@ -1,8 +1,9 @@
 const model = {
-    app: {
+    app: { // del 1
         currentPage: 'search',
     },
-    inputs: {
+
+    inputs: { // del 2
         search: {
             sort: null, // { field: 'title', direction: 1 }
             filter: null, // { title: '', genre: '', year: '' }
@@ -14,6 +15,13 @@ const model = {
         edit: {
 
         },
+        preview: {
+            movieIndex: null,
+        },
     },
+
+    // del 3 - data
     movies: [], // leses inn via movies.js
+    genres: [], // 
+    year: [], //
 };

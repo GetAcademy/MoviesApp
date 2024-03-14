@@ -1,6 +1,6 @@
 function updateViewSearch() {
     document.getElementById('app').innerHTML = /*HTML*/`
-        <h1>Film-søk</h1>
+        <h1>Filmer fra 2020-tallet</h1>
         <div>
             ${createFilterFormHtml()}
         </div>
@@ -8,26 +8,32 @@ function updateViewSearch() {
             ${createPagingHtml()}
         </div>
         <table>
-            <tr>
-                <th></th>
-                <th>
-                    Tittel 
-                    <button onclick="sort('title',1)" ${getDisabled('title', 1)}>▲</button>
-                    <button onclick="sort('title',-1)" ${getDisabled('title', -1)}>▼</button>
-                </th>
-                <th>
-                    Sjanger 
-                    <button onclick="sort('genre',1)" ${getDisabled('genre', 1)}>▲</button>
-                    <button onclick="sort('genre',-1)" ${getDisabled('genre', -1)}>▼</button>
-                </th>
-                <th>
-                    År 
-                    <button onclick="sort('year',1)" ${getDisabled('year', 1)}>▲</button>
-                    <button onclick="sort('year',-1)" ${getDisabled('year', -1)}>▼</button>
-                </th>
-            </tr>
+            ${createHeaderRow()}
             ${createMoviesHtml()}
         </table>
+    `;
+}
+
+function createHeaderRow(){
+    return /*HTML*/`    
+        <tr>
+            <th></th>
+            <th>
+                Tittel 
+                <button onclick="sort('title',1)" ${getDisabled('title', 1)}>▲</button>
+                <button onclick="sort('title',-1)" ${getDisabled('title', -1)}>▼</button>
+            </th>
+            <th>
+                Sjanger 
+                <button onclick="sort('genre',1)" ${getDisabled('genre', 1)}>▲</button>
+                <button onclick="sort('genre',-1)" ${getDisabled('genre', -1)}>▼</button>
+            </th>
+            <th>
+                År 
+                <button onclick="sort('year',1)" ${getDisabled('year', 1)}>▲</button>
+                <button onclick="sort('year',-1)" ${getDisabled('year', -1)}>▼</button>
+            </th>
+        </tr>    
     `;
 }
 
@@ -92,8 +98,11 @@ function createMoviesHtml() {
         html += /*HTML*/`
             <tr>
                 <td><img class="movie" src="${movie.thumbnail}"/></td>
-                <td>${movie.title}</td>
-                <td>${movie.genres.join()}</td>
+                <td>
+                    ${movie.title} 
+                    <button onclick="showMovie(${i})">vis</button>
+                </td>
+                <td>${movie.genres.join(', ')}</td>
                 <td>${movie.year}</td>
             </tr>
         `;

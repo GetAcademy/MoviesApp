@@ -16,3 +16,9 @@ function selectPage(pageNo) {
     model.inputs.search.pageNo = pageNo;
     updateView();
 }
+
+function showMovie(index) {
+    model.inputs.preview.movieIndex = index;
+    model.app.currentPage = 'preview';
+    updateView();
+}
