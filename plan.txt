@@ -1,0 +1,5 @@
+ - Listeoperasjoner 
+   - sortering
+   - filtrering
+   - paginering
+ - Repetisjon egne sider, feks side for å vise detaljer om en valgt film
