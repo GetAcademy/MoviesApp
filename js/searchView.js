@@ -27,9 +27,30 @@ function updateViewSearch() {
 }
 
 function createFilterFormHtml() {
-    const filter = model.inputs.filter;
+    const filter = model.inputs.search.filter;
     if (filter == null) return /*HTML*/`<button onclick="updateFilterMode(true)">Filtrer</button>`;
     return /*HTML*/`
+        Tittel: <br/>
+        <input 
+            type="text" 
+            oninput="model.inputs.search.filter.title=this.value"
+            value="${model.inputs.search.filter.title ?? ''}"            
+            />
+            <br/>
+        Sjanger: <br/>
+        <input 
+            type="text" 
+            oninput="model.inputs.search.filter.title=this.value"
+            value="${model.inputs.search.filter.title ?? ''}"            
+            />
+            <br/>
+        Tittel: <br/>
+        <input 
+            type="text" 
+            oninput="model.inputs.search.filter.title=this.value"
+            value="${model.inputs.search.filter.title ?? ''}"            
+            />
+            <br/>
         <button onclick="updateFilterMode(false)">Skru av filtrering</button>        
     `;
 }

@@ -4,11 +4,8 @@ const model = {
     },
     inputs: {
         search: {
-            sort: null, 
-            // {
-            //     field: 'title',
-            //     direction: 1,
-            // },
+            sort: null, // { field: 'title', direction: 1 }
+            filter: null, // { title: '', genre: '', year: '' }
         },
         add: {
 
@@ -19,3 +16,11 @@ const model = {
     },
     movies: [], // leses inn via movies.js
 };
+
+model.genres = new Set();
+for(let movie of model.movies){
+    let genres = movie.genres.split(',');
+    for(let genre of genres){
+        model.genres.add(genre);
+    }
+}
