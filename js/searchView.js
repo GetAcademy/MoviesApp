@@ -63,20 +63,20 @@ function createFilterFormHtml() {
             <br/>
         Sjanger: <br/>
         <select onchange="model.inputs.search.filter.genre=this.value">
-            ${createOptionsHtml(model.genres, model.inputs.search.filter.genre, 'model.inputs.search.filter.genre')}
+            ${createOptionsHtml(model.genres, model.inputs.search.filter.genre)}
         </select>
         <br/>
         År: <br/>
         <select onchange="model.inputs.search.filter.year=this.value">
-            ${createOptionsHtml(model.years, model.inputs.search.filter.year, 'model.inputs.search.filter.year')}
+            ${createOptionsHtml(model.years, model.inputs.search.filter.year)}
         </select>
         <br/>
-        <button onclick="filter()">Filtrer</button>        
-        <button onclick="updateFilterMode(false)">Skru av filtrering</button>        
+        <button onclick="updateView()">Filtrer</button>        
+        <button onclick="updateFilterMode(false)">Avbryt</button>        
     `;
 }
 
-function createOptionsHtml(values, selectedValue, modelField) {
+function createOptionsHtml(values, selectedValue) {
     let html = /*HTML*/`<option ${selectedValue == null ? 'selected' : ''}></option>`;
     for (let value of values) {
         html += /*HTML*/`<option ${selectedValue == value ? 'selected' : ''}>${value}</option>`
@@ -92,25 +92,9 @@ function getDisabled(field, direction) {
 
 function createMoviesHtml() {
     let html = '';
-    let movies = model.movies;
-    const sort = model.inputs.search.sort;
-    if (sort != null) {
-        const field = sort.field;
-        const direction = sort.direction;
-        movies = movies.toSorted((a, b) =>
-            a[field] == b[field] ? 0 :
-            a[field] < b[field] ? -direction : direction
-        );
-    }
-    // if (sort != null) {
-    //     const field = sort.field;
-    //     const direction = sort.direction;
-    //     movies = JSON.parse(JSON.stringify(movies));
-    //     movies.sort((a, b) =>
-    //         a[field] == b[field] ? 0 :
-    //             a[field] < b[field] ? -direction : direction
-    //     );
-    // }
+    let movies = doSelectedFilter(model.movies);
+    movies = doSelectedSort(movies);
+
     for (let i = 0; i < movies.length; i++) {
         const movie = movies[i];
         html += /*HTML*/`
@@ -126,4 +110,38 @@ function createMoviesHtml() {
         `;
     }
     return html;
+}
+
+function doSelectedFilter(movies) {
+    const filter = model.inputs.search.filter;
+    if (filter == null) return movies;
+    let filteredMovies = [];
+    for (let movie of movies) {
+        if (movie.title.includes(filter.title)) {
+            filteredMovies.push(movie);
+        }
+    }
+    return filteredMovies;
+}
+
+function doSelectedSort(movies) {
+    const sort = model.inputs.search.sort;
+    if (sort == null) return movies;
+
+    const field = sort.field;
+    const direction = sort.direction;
+    return movies.toSorted((a, b) =>
+        a[field] == b[field] ? 0 :
+            a[field] < b[field] ? -direction : direction
+    );
+
+    // if (sort != null) {
+    //     const field = sort.field;
+    //     const direction = sort.direction;
+    //     movies = JSON.parse(JSON.stringify(movies));
+    //     movies.sort((a, b) =>
+    //         a[field] == b[field] ? 0 :
+    //             a[field] < b[field] ? -direction : direction
+    //     );
+    // }
 }
