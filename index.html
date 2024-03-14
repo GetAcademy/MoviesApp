@@ -16,9 +16,25 @@
     <script src="js/editController.js"></script>
 </head>
 
-<body onload="updateView()">
+<body onload="initData()">
     <div id="app"></div>
     <script>
+        function initData() {
+            const genres = new Set();
+            const years = new Set();
+            for (let movie of model.movies) {
+                years.add(movie.year);
+                for (let genre of movie.genres) {
+                    genres.add(genre);
+                }
+            }
+            model.genres = Array.from(genres);
+            model.years = Array.from(years);
+            model.genres.sort();
+            model.years.sort();            
+            updateView();
+        }
+
         function updateView() {
             const page = model.app.currentPage;
             if (page == 'search') updateViewSearch();

@@ -44,12 +44,20 @@ function createFilterFormHtml() {
         <br/>
         År: <br/>
         <select onchange="model.inputs.search.filter.year=this.value">
-            ${createOptionsHtml(model.genres, model.inputs.search.filter.year, 'model.inputs.search.filter.year')}
+            ${createOptionsHtml(model.years, model.inputs.search.filter.year, 'model.inputs.search.filter.year')}
         </select>
         <br/>
         <button onclick="filter()">Filtrer</button>        
         <button onclick="updateFilterMode(false)">Skru av filtrering</button>        
     `;
+}
+
+function createOptionsHtml(values, selectedValue, modelField){
+    let html = /*HTML*/`<option ${selectedValue == null ? 'selected' : ''}></option>`;
+    for(let value of values){
+        html += /*HTML*/`<option ${selectedValue == value ? 'selected' : ''}>${value}</option>`
+    }
+    return html;
 }
 
 function getDisabled(fieldName, direction) {
