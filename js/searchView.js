@@ -44,11 +44,17 @@ function createPagingHtml(movieCount) {
     const startPageNo = Math.max(2, selectedPageNo - 4);
     const endPageNo = Math.min(pageCount, startPageNo + 10);
     let html = '';
-    if (startPageNo > 1) html += createPageNoHtml(1, selectedPageNo);
+    if (startPageNo > 1) {
+        html += createPageNoHtml(1, selectedPageNo) 
+        if(startPageNo>2) html += ' ... ';
+    }
     for (let pageNo = startPageNo; pageNo <= endPageNo; pageNo++) {
         html += createPageNoHtml(pageNo, selectedPageNo);
     }
-    if (endPageNo < pageCount) html += createPageNoHtml(pageCount, selectedPageNo);
+    if (endPageNo < pageCount) {
+        if(endPageNo< pageCount-1) html += ' ... ';
+        html += createPageNoHtml(pageCount, selectedPageNo);
+    }
     return html;
 }
 
