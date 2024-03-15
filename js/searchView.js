@@ -127,23 +127,18 @@ function doSelectedFilter(movies) {
     if (filter == null) return movies;
     let filteredMovies = [];
     for (let movie of movies) {
-        if (isMatchString(filter.title, movie.title)
-            && isMatchNumber(filter.year, movie.year)
-            && isMatchString(filter.genre, movie.genres)) {
+        if (isMatch(filter.title, movie.title)
+            && isMatch(filter.year, movie.year)
+            && isMatch(filter.genre, movie.genres)) {
             filteredMovies.push(movie);
         }
     }
     return filteredMovies;
 }
 
-function isMatchString(filterString, fullString) {
-    if (typeof (filterString) != 'string') return true;
-    return fullString.includes(filterString);
-}
-
-function isMatchNumber(filterString, number) {
-    if (typeof (filterString) != 'string' || filterString == '') return true;
-    return filterString == number;
+function isMatch(filterString, value) {
+    if (typeof (filterString) != 'string'|| filterString == '') return true;
+    return typeof(value)=='number'? filterString == number: value.includes(filterString);
 }
 
 function doSelectedSort(movies) {
@@ -154,7 +149,7 @@ function doSelectedSort(movies) {
     const direction = sort.direction;
     return movies.toSorted((a, b) =>
         a[field] == b[field] ? 0 :
-            a[field] < b[field] ? -direction : direction
+        a[field] < b[field] ? -direction : direction
     );
 
     // if (sort != null) {
