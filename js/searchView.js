@@ -24,6 +24,7 @@ function createHeaderRow() {
                 <button onclick="sort('title',1)" ${getDisabled('title', 1)}>▲</button>
                 <button onclick="sort('title',-1)" ${getDisabled('title', -1)}>▼</button>
             </th>
+            <th class="narrow"></th>
             <th>
                 Sjanger 
                 <button onclick="sort('genre',1)" ${getDisabled('genre', 1)}>▲</button>
@@ -119,8 +120,8 @@ function createMoviesHtmlAndCount() {
                 <td><img class="movie" src="${movie.thumbnail}"/></td>
                 <td>
                     ${movie.title} 
-                    <button onclick="showMovie(${i})">vis</button>
                 </td>
+                <td><button onclick="showMovie(${i})">vis</button></td>
                 <td>${movie.genres.join(', ')}</td>
                 <td>${movie.year}</td>
             </tr>

@@ -23,3 +23,7 @@ tr:nth-child(even){
 td,th{
     padding: 2px;
 }
+
+th.narrow{
+    width: fit-content;
+}
