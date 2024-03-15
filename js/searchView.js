@@ -128,7 +128,8 @@ function doSelectedFilter(movies) {
     let filteredMovies = [];
     for (let movie of movies) {
         if (isMatchString(filter.title, movie.title)
-            && isMatchNumber(filter.year, movie.year)) {
+            && isMatchNumber(filter.year, movie.year)
+            && isMatchString(filter.genre, movie.genres)) {
             filteredMovies.push(movie);
         }
     }
