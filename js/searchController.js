@@ -24,6 +24,6 @@ function showMovie(index) {
 }
 
 function filter(){
-    //model.inputs.search.pageNo = 1;
+    model.inputs.search.pageNo = 1;
     updateView();
 }

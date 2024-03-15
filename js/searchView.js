@@ -39,16 +39,22 @@ function createHeaderRow() {
 }
 
 function createPagingHtml(movieCount) {
-    let html = '';
     const pageCount = Math.ceil(movieCount / 10);
-    const selectedPageNo = Math.min(model.inputs.search.pageNo, pageCount);
-    for (let pageNo = 1; pageNo < pageCount; pageNo++) {
-        if (pageCount > 20 && pageNo > 10 && pageNo < pageCount - 10) continue;
-        html += selectedPageNo == pageNo ? ` <b>${pageNo}</b>` :
-            /*HTML*/` <a href="javascript:selectPage(${pageNo})">${pageNo}</a>`;
-        if (pageCount > 20 && pageNo == 10) html += ' ...';
+    const selectedPageNo = model.inputs.search.pageNo;
+    const startPageNo = Math.max(2, selectedPageNo - 4);
+    const endPageNo = Math.min(pageCount, startPageNo + 10);
+    let html = '';
+    if (startPageNo > 1) html += createPageNoHtml(1, selectedPageNo);
+    for (let pageNo = startPageNo; pageNo <= endPageNo; pageNo++) {
+        html += createPageNoHtml(pageNo, selectedPageNo);
     }
+    if (endPageNo < pageCount) html += createPageNoHtml(pageCount, selectedPageNo);
     return html;
+}
+
+function createPageNoHtml(pageNo, selectedPageNo) {
+    return selectedPageNo == pageNo ? ` <b>${pageNo}</b>` :
+        /*HTML*/` <a href="javascript:selectPage(${pageNo})">${pageNo}</a>`;
 }
 
 function createFilterFormHtml() {
