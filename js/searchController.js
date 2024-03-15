@@ -23,6 +23,12 @@ function showMovie(index) {
     updateView();
 }
 
+function showTrailer(index) {
+    const movie = model.movies[index];
+    const url = `https://www.youtube.com/results?search_query=${movie.title} ${movie.year} trailer`;
+    window.open(url, '_blank');
+}
+
 function filter(){
     model.inputs.search.pageNo = 1;
     updateView();

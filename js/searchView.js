@@ -121,7 +121,10 @@ function createMoviesHtmlAndCount() {
                 <td>
                     ${movie.title} 
                 </td>
-                <td><button onclick="showMovie(${i})">vis</button></td>
+                <td>
+                    <button onclick="showMovie(${i})">vis</button>
+                    <button onclick="showTrailer(${i})">trailer</button>
+                </td>
                 <td>${movie.genres.join(', ')}</td>
                 <td>${movie.year}</td>
             </tr>
