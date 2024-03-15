@@ -137,8 +137,8 @@ function doSelectedFilter(movies) {
 }
 
 function isMatch(filterString, value) {
-    if (typeof (filterString) != 'string'|| filterString == '') return true;
-    return typeof(value)=='number'? filterString == number: value.includes(filterString);
+    if (typeof (filterString) != 'string' || filterString == '') return true;
+    return typeof (value) == 'number' ? filterString == value : value.includes(filterString);
 }
 
 function doSelectedSort(movies) {
@@ -149,7 +149,7 @@ function doSelectedSort(movies) {
     const direction = sort.direction;
     return movies.toSorted((a, b) =>
         a[field] == b[field] ? 0 :
-        a[field] < b[field] ? -direction : direction
+            a[field] < b[field] ? -direction : direction
     );
 
     // if (sort != null) {
