@@ -22,3 +22,8 @@ function showMovie(index) {
     model.app.currentPage = 'preview';
     updateView();
 }
+
+function filter(){
+    //model.inputs.search.pageNo = 1;
+    updateView();
+}

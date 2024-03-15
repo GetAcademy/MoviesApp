@@ -1,15 +1,16 @@
 function updateViewSearch() {
+    const movies = createMoviesHtmlAndCount();
     document.getElementById('app').innerHTML = /*HTML*/`
         <h1>Filmer fra 2020-tallet</h1>
         <div>
             ${createFilterFormHtml()}
         </div>
         <div>
-            ${createPagingHtml()}
+            ${createPagingHtml(movies.count)}
         </div>
         <table>
             ${createHeaderRow()}
-            ${createMoviesHtml()}
+            ${movies.html}
         </table>
     `;
 }
@@ -37,10 +38,10 @@ function createHeaderRow() {
     `;
 }
 
-function createPagingHtml() {
-    const selectedPageNo = model.inputs.search.pageNo;
+function createPagingHtml(movieCount) {
     let html = '';
-    const pageCount = model.movies.length / 10;
+    const pageCount = Math.ceil(movieCount / 10);
+    const selectedPageNo = Math.min(model.inputs.search.pageNo, pageCount);
     for (let pageNo = 1; pageNo < pageCount; pageNo++) {
         if (pageCount > 20 && pageNo > 10 && pageNo < pageCount - 10) continue;
         html += selectedPageNo == pageNo ? ` <b>${pageNo}</b>` :
@@ -73,7 +74,7 @@ function createFilterFormHtml() {
             ${createOptionsHtml(model.years, model.inputs.search.filter.year)}
         </select>
         <br/>
-        <button onclick="updateView()">Filtrer</button>        
+        <button onclick="filter()">Filtrer</button>        
         <button onclick="updateFilterMode(false)">Avbryt</button>        
     `;
 }
@@ -92,9 +93,10 @@ function getDisabled(field, direction) {
     return sort.field == field && sort.direction == direction ? 'disabled' : '';
 }
 
-function createMoviesHtml() {
+function createMoviesHtmlAndCount() {
     let html = '';
     let movies = doSelectedFilter(model.movies);
+    const count = movies.length;
     movies = doSelectedSort(movies);
     movies = showOnlySelectedPage(movies);
 
@@ -112,7 +114,7 @@ function createMoviesHtml() {
             </tr>
         `;
     }
-    return html;
+    return { html, count };
 }
 
 function showOnlySelectedPage(movies) {
