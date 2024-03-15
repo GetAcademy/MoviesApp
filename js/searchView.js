@@ -127,11 +127,22 @@ function doSelectedFilter(movies) {
     if (filter == null) return movies;
     let filteredMovies = [];
     for (let movie of movies) {
-        if (movie.title.includes(filter.title)) {
+        if (isMatchString(filter.title, movie.title)
+            && isMatchNumber(filter.year, movie.year)) {
             filteredMovies.push(movie);
         }
     }
     return filteredMovies;
+}
+
+function isMatchString(filterString, fullString) {
+    if (typeof (filterString) != 'string') return true;
+    return fullString.includes(filterString);
+}
+
+function isMatchNumber(filterString, number) {
+    if (typeof (filterString) != 'string' || filterString == '') return true;
+    return filterString == number;
 }
 
 function doSelectedSort(movies) {
